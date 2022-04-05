@@ -1,0 +1,30 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from math import pi
+from math import pow
+from math import exp
+
+x = np.arange(0,6,0.00001)
+x0 = 0.35
+x1 = 0.04
+sig = 0.371
+Ng = 2500
+Se = 150
+
+a= ((1.0 - x0)* pi * sig * Ng)/ (16.0 * Se)
+b= x1*pow(((pi*sig*Ng)/(Se*16)),2)
+
+def func (n):
+    return exp(-a*n  - b*pow(n,2))
+
+y = list(map(func,x))
+plt.yscale('log')
+
+p = plt.plot(x,y)
+
+plt.xlabel('Dose (Gy)')
+plt.ylabel('Survival Fraction (pi)')
+
+plt.title('OG Eqn')
+
+plt.show()
